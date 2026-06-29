@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MOSAIC: Multimodal Perceptual Cue Fusion for Full-Reference Point Cloud Quality Assessment.">
+    <title>MOSAIC | Full-Reference Point Cloud Quality Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="MOSAIC home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        MOSAIC
+      </a>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <h1 id="hero-title">MOSAIC</h1>
+            <p class="subtitle">Multimodal Perceptual Cue Fusion for Full-Reference Point Cloud Quality Assessment</p>
+            <div class="hero-meta" aria-label="Authors and affiliation">
+              <p>Jiaxin Li, Tong Chen, Zehong Li, Dandan Ding, and Zhan Ma</p>
+              <p>School of Electronic Science and Engineering, Nanjing University</p>
+            </div>
+            <div class="actions" aria-label="Paper links">
+              <a class="button primary" href="assets/mosaic.pdf">Paper</a>
+              <a class="button secondary" href="#citation">Citation</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section muted" id="method" aria-labelledby="method-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Method</p>
+              <h2 id="method-title">3D structure and appearance first, saliency-aware fusion second.</h2>
+            </div>
+            <p>Native 3D fidelity, followed by saliency modulation.</p>
+          </div>
+          <figure class="framework">
+            <img src="assets/mosaic_framework.png" alt="MOSAIC framework showing point alignment, 3D feature extraction, 2D saliency projection, and multimodal adaptive fusion.">
+            <figcaption>MOSAIC framework.</figcaption>
+          </figure>
+          <div class="method-grid" aria-label="MOSAIC method components">
+            <article class="method-item">
+              <span>Geometry</span>
+              <h3>3D Geometry</h3>
+              <p>Shape, linearity, curvature, density.</p>
+            </article>
+            <article class="method-item">
+              <span>Color</span>
+              <h3>3D Color</h3>
+              <p>RGB appearance consistency.</p>
+            </article>
+            <article class="method-item">
+              <span>Saliency</span>
+              <h3>2D Saliency</h3>
+              <p>Projected attention cues.</p>
+            </article>
+            <article class="method-item">
+              <span>Fusion</span>
+              <h3>Adaptive Fusion</h3>
+              <p>3D fidelity, then saliency.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="results" aria-labelledby="results-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Results</p>
+              <h2 id="results-title">Strong training-free performance across datasets.</h2>
+            </div>
+            <p>Best training-free results on WPC and LS-PCQA.</p>
+          </div>
+          <div class="metrics" aria-label="Highlighted MOSAIC results">
+            <div class="metric">
+              <span class="metric-tag">WPC</span>
+              <span class="metric-value">0.844 / 0.834</span>
+              <span class="metric-label">WPC PLCC / SROCC</span>
+            </div>
+            <div class="metric">
+              <span class="metric-tag">LS-PCQA</span>
+              <span class="metric-value">0.622 / 0.598</span>
+              <span class="metric-label">LS-PCQA PLCC / SROCC</span>
+            </div>
+            <div class="metric">
+              <span class="metric-tag">Runtime</span>
+              <span class="metric-value">6.41s</span>
+              <span class="metric-label">Average runtime</span>
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-copy">
+              <h3>MOSAIC across five PCQA datasets</h3>
+            </div>
+            <div class="table-wrap" role="region" aria-label="MOSAIC result table across datasets" tabindex="0">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dataset</th>
+                    <th>PLCC</th>
+                    <th>SROCC</th>
+                    <th>RMSE</th>
+                    <th>Positioning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>SJTU</td>
+                    <td>0.912</td>
+                    <td>0.898</td>
+                    <td>0.994</td>
+                    <td>Competitive</td>
+                  </tr>
+                  <tr>
+                    <td>WPC</td>
+                    <td>0.844</td>
+                    <td>0.834</td>
+                    <td>12.292</td>
+                    <td>Best training-free</td>
+                  </tr>
+                  <tr>
+                    <td>ICIP</td>
+                    <td>0.965</td>
+                    <td>0.955</td>
+                    <td>0.297</td>
+                    <td>Competitive</td>
+                  </tr>
+                  <tr>
+                    <td>LS-PCQA</td>
+                    <td>0.622</td>
+                    <td>0.598</td>
+                    <td>0.652</td>
+                    <td>Best training-free</td>
+                  </tr>
+                  <tr>
+                    <td>MJ-PCCD</td>
+                    <td>0.831</td>
+                    <td>0.755</td>
+                    <td>0.651</td>
+                    <td>Competitive</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="result-block">
+            <div class="result-copy">
+              <h3>Selected training-free baseline comparison</h3>
+            </div>
+            <div class="table-wrap" role="region" aria-label="Selected training-free baseline comparison on WPC and LS-PCQA" tabindex="0">
+              <table class="wide-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>WPC PLCC</th>
+                    <th>WPC SROCC</th>
+                    <th>WPC RMSE</th>
+                    <th>LS-PCQA PLCC</th>
+                    <th>LS-PCQA SROCC</th>
+                    <th>LS-PCQA RMSE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>PCQM</td>
+                    <td>0.750</td>
+                    <td>0.743</td>
+                    <td>15.164</td>
+                    <td>0.404</td>
+                    <td>0.362</td>
+                    <td>0.761</td>
+                  </tr>
+                  <tr>
+                    <td>GraphSIM</td>
+                    <td>0.687</td>
+                    <td>0.678</td>
+                    <td>16.649</td>
+                    <td>0.252</td>
+                    <td>0.243</td>
+                    <td>0.805</td>
+                  </tr>
+                  <tr>
+                    <td>PQI</td>
+                    <td>0.813</td>
+                    <td>0.808</td>
+                    <td>13.364</td>
+                    <td>0.437</td>
+                    <td>0.379</td>
+                    <td>0.748</td>
+                  </tr>
+                  <tr>
+                    <td>TCDM</td>
+                    <td>0.806</td>
+                    <td>0.804</td>
+                    <td>13.557</td>
+                    <td>0.335</td>
+                    <td>0.325</td>
+                    <td>0.784</td>
+                  </tr>
+                  <tr>
+                    <td>PHM</td>
+                    <td>0.838</td>
+                    <td>0.833</td>
+                    <td>12.510</td>
+                    <td>0.546</td>
+                    <td>0.500</td>
+                    <td>0.697</td>
+                  </tr>
+                  <tr class="highlight-row">
+                    <td>MOSAIC</td>
+                    <td>0.844</td>
+                    <td>0.834</td>
+                    <td>12.292</td>
+                    <td>0.622</td>
+                    <td>0.598</td>
+                    <td>0.652</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="result-columns">
+            <div class="result-block compact">
+              <div class="result-copy">
+                <h3>Fusion strategy ablation</h3>
+              </div>
+              <div class="table-wrap" role="region" aria-label="Fusion strategy ablation" tabindex="0">
+                <table class="compact-table">
+                  <thead>
+                    <tr>
+                      <th>Scheme</th>
+                      <th>Fusion</th>
+                      <th>WPC PLCC/SROCC</th>
+                      <th>LS-PCQA PLCC/SROCC</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Only 3D</td>
+                      <td>Adaptive</td>
+                      <td>0.793 / 0.775</td>
+                      <td>0.523 / 0.493</td>
+                    </tr>
+                    <tr>
+                      <td>One-stage</td>
+                      <td>Uniform</td>
+                      <td>0.835 / 0.823</td>
+                      <td>0.564 / 0.533</td>
+                    </tr>
+                    <tr>
+                      <td>One-stage</td>
+                      <td>Adaptive</td>
+                      <td>0.836 / 0.825</td>
+                      <td>0.586 / 0.560</td>
+                    </tr>
+                    <tr>
+                      <td>Two-stage</td>
+                      <td>Uniform</td>
+                      <td>0.844 / 0.833</td>
+                      <td>0.592 / 0.566</td>
+                    </tr>
+                    <tr class="highlight-row">
+                      <td>Two-stage</td>
+                      <td>Adaptive</td>
+                      <td>0.844 / 0.834</td>
+                      <td>0.622 / 0.598</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="result-block compact">
+              <div class="result-copy">
+                <h3>Runtime comparison</h3>
+              </div>
+              <div class="table-wrap" role="region" aria-label="Runtime comparison across methods" tabindex="0">
+                <table class="compact-table">
+                  <thead>
+                    <tr>
+                      <th>Method</th>
+                      <th>Time (s)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>PCQM</td>
+                      <td>3.55</td>
+                    </tr>
+                    <tr>
+                      <td>PointSSIM</td>
+                      <td>4.24</td>
+                    </tr>
+                    <tr>
+                      <td>PQI</td>
+                      <td>4.71</td>
+                    </tr>
+                    <tr>
+                      <td>TCDM</td>
+                      <td>5.22</td>
+                    </tr>
+                    <tr class="highlight-row">
+                      <td>MOSAIC</td>
+                      <td>6.41</td>
+                    </tr>
+                    <tr>
+                      <td>PHM</td>
+                      <td>14.96</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <p class="note">
+            Higher PLCC/SROCC and lower RMSE are better.
+          </p>
+        </div>
+      </section>
+
+      <section class="section muted" id="citation" aria-labelledby="citation-title">
+        <div class="section-inner citation-grid">
+          <div>
+            <p class="section-kicker">Citation</p>
+            <h2 id="citation-title">Citation coming soon.</h2>
+          </div>
+          <pre aria-label="Citation placeholder"><code>Citation coming soon.</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>MOSAIC</span>
+      <span>Full-Reference Point Cloud Quality Assessment</span>
+    </footer>
+  </body>
+</html>
