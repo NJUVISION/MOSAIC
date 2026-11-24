@@ -1,32 +1,29 @@
-# MOSAIC GitHub Pages Package
+# MOSAIC research project page
 
-This folder contains the complete static website.
+A self-contained static website. No build step, package installation, external fonts, or framework is required.
+
+## Preview
+
+Open `index.html` in a browser, or run `python3 -m http.server 8000` from this directory and visit `http://localhost:8000`.
+
+## Update the existing GitHub Pages site
+
+Upload the **contents** of this folder to the existing website repository and the directory/branch already configured for GitHub Pages. Keep `index.html` at that configured publishing root. Do not upload the ZIP itself or add an extra nesting level.
+
+The Code buttons link to `https://github.com/LiJacci/MOSAIC.git`. The code repository and website repository may be different; confirm the existing website repository before uploading. This package does not change repository settings or deploy anything automatically.
 
 ## Files
 
-- `index.html`
-- `styles.css`
-- `assets/mosaic.pdf`
-- `assets/mosaic_framework.png`
+- `index.html`: page content, results, author affiliations, and citation.
+- `styles.css`: responsive layout and visual design.
+- `script.js`: section navigation highlighting.
+- `assets/mosaic.pdf`: the original supplied manuscript, unchanged.
+- `assets/mosaic_framework.png`: higher-resolution framework extracted from page 4 of that manuscript.
+- `assets/favicon.svg`: site icon.
+- `REVIEW_NOTES.txt`: content corrections and verification notes.
 
-## Publish on GitHub Pages
+## Citation
 
-1. Create a new public GitHub repository.
-2. Upload all files in this folder to the repository root.
-3. Open repository `Settings` -> `Pages`.
-4. Set `Source` to `Deploy from a branch`.
-5. Select branch `main` and folder `/root`.
-6. Save and wait for GitHub Pages to build.
+The citation section displays “Coming soon.” No provisional BibTeX, copy button, or .bib download is included. Add the official citation when it becomes available.
 
-The final URL is usually:
-
-```text
-https://<username>.github.io/<repository-name>/
-```
-
-For a user site repository named `<username>.github.io`, the URL is:
-
-```text
-https://<username>.github.io/
-```
-
+Core content, tables, links, and expandable sections work without JavaScript. Runtime information is not shown on the website.

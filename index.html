@@ -1,354 +1,104 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="MOSAIC: Multimodal Perceptual Cue Fusion for Full-Reference Point Cloud Quality Assessment.">
-    <title>MOSAIC | Full-Reference Point Cloud Quality Assessment</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="MOSAIC home">
-        <span class="brand-mark" aria-hidden="true"></span>
-        MOSAIC
-      </a>
-      <nav class="nav" aria-label="Page sections">
-        <a href="#method">Method</a>
-        <a href="#results">Results</a>
-        <a href="#citation">Citation</a>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <h1 id="hero-title">MOSAIC</h1>
-            <p class="subtitle">Multimodal Perceptual Cue Fusion for Full-Reference Point Cloud Quality Assessment</p>
-            <div class="hero-meta" aria-label="Authors and affiliation">
-              <p>Jiaxin Li, Tong Chen, Zehong Li, Dandan Ding, and Zhan Ma</p>
-              <p>School of Electronic Science and Engineering, Nanjing University</p>
-            </div>
-            <div class="actions" aria-label="Paper links">
-              <a class="button primary" href="assets/mosaic.pdf">Paper</a>
-              <a class="button secondary" href="#citation">Citation</a>
-            </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MOSAIC fuses 3D geometry, color, and projected 2D saliency for training-free full-reference point cloud quality assessment. Paper, code, and benchmark results.">
+  <meta name="theme-color" content="#0c5555">
+  <meta property="og:title" content="MOSAIC — Multimodal Perceptual Cue Fusion">
+  <meta property="og:description" content="Three perceptual cues. Two-stage fusion. Training-free point cloud quality assessment.">
+  <meta property="og:type" content="website">
+  <title>MOSAIC | Multimodal Perceptual Cue Fusion</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="MOSAIC home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>MOSAIC</a>
+      <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#citation">Citation</a><a class="nav-code" href="https://github.com/LiJacci/MOSAIC.git" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>Code</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="venue">IEEE TCSVT</span> Accepted for publication</p>
+          <h1 id="hero-title">MOSAIC<span class="title-dot">.</span></h1>
+          <p class="paper-title">Multimodal Perceptual Cue Fusion for Full-Reference Point Cloud Quality Assessment</p>
+          <p class="hero-summary">Bringing structure, appearance, and visual attention together — without MOS-supervised training.</p>
+          <p class="authors">Jiaxin Li<sup>1</sup>, Tong Chen<sup>1</sup>, Zehong Li<sup>2</sup>,<br class="desktop-break"> Dandan Ding<sup>2</sup>, and Zhan Ma<sup>1</sup></p>
+          <div class="affiliations"><p><sup>1</sup> School of Electronic Science and Engineering,<br> Nanjing University</p><p><sup>2</sup> School of Information Science and Technology,<br> Hangzhou Normal University</p></div>
+          <div class="actions" aria-label="Research resources">
+            <a class="button primary" href="assets/mosaic.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg>Paper</a>
+            <a class="button secondary" href="https://github.com/LiJacci/MOSAIC.git" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>Code</a>
+            <a class="button quiet" href="#citation">Cite this work</a>
           </div>
         </div>
-      </section>
+        <aside class="fusion-art" aria-label="Conceptual overview: geometry and color form intrinsic 3D fidelity; saliency is then fused to produce the final score.">
+          <div class="art-heading"><span>THE IDEA</span><span>3D + 2D</span></div>
+          <div class="cue-pair">
+            <div class="cue geometry"><svg viewBox="0 0 100 90" aria-hidden="true"><path d="m50 7 35 20v40L50 87 15 67V27zM15 27l35 20 35-20M50 47v40M50 7v40M15 67l35-20 35 20"/><circle cx="50" cy="7" r="3.4"/><circle cx="85" cy="27" r="3.4"/><circle cx="85" cy="67" r="3.4"/><circle cx="50" cy="87" r="3.4"/><circle cx="15" cy="67" r="3.4"/><circle cx="15" cy="27" r="3.4"/><circle cx="50" cy="47" r="3.4"/><circle cx="32" cy="17" r="3.4"/><circle cx="68" cy="17" r="3.4"/><circle cx="32" cy="77" r="3.4"/><circle cx="68" cy="77" r="3.4"/></svg><span>Geometry</span><small>Structure</small></div>
+            <div class="cue color"><div class="color-mosaic" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>Color</span><small>Appearance</small></div>
+          </div>
+          <div class="merge-line" aria-hidden="true"></div>
+          <div class="fusion-node"><span>STAGE I</span><strong>Intrinsic 3D fidelity</strong><small>Geometry + color</small></div>
+          <div class="stage-two"><div class="vertical-line" aria-hidden="true"></div><div class="saliency-cue"><span class="saliency-symbol" aria-hidden="true"></span><span>2D saliency<small>Six projected views</small></span></div></div>
+          <div class="final-node"><span>STAGE II · ADAPTIVE FUSION</span><strong>Perceptual quality</strong><div class="score-line" aria-hidden="true"></div></div>
+          <p class="art-caption">Complementary cues. One quality score.</p>
+        </aside>
+      </div>
+      <div class="container hero-strip"><span><strong>Training-free</strong> No MOS-supervised score fitting</span><span><strong>Two-stage</strong> Bounded adaptive weighting</span><span><strong>Five datasets</strong> Diverse content and distortions</span></div>
+    </section>
 
-      <section class="section muted" id="method" aria-labelledby="method-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <div>
-              <p class="section-kicker">Method</p>
-              <h2 id="method-title">3D structure and appearance first, saliency-aware fusion second.</h2>
-            </div>
-            <p>Native 3D fidelity, followed by saliency modulation.</p>
-          </div>
-          <figure class="framework">
-            <img src="assets/mosaic_framework.png" alt="MOSAIC framework showing point alignment, 3D feature extraction, 2D saliency projection, and multimodal adaptive fusion.">
-            <figcaption>MOSAIC framework.</figcaption>
-          </figure>
-          <div class="method-grid" aria-label="MOSAIC method components">
-            <article class="method-item">
-              <span>Geometry</span>
-              <h3>3D Geometry</h3>
-              <p>Shape, linearity, curvature, density.</p>
-            </article>
-            <article class="method-item">
-              <span>Color</span>
-              <h3>3D Color</h3>
-              <p>RGB appearance consistency.</p>
-            </article>
-            <article class="method-item">
-              <span>Saliency</span>
-              <h3>2D Saliency</h3>
-              <p>Projected attention cues.</p>
-            </article>
-            <article class="method-item">
-              <span>Fusion</span>
-              <h3>Adaptive Fusion</h3>
-              <p>3D fidelity, then saliency.</p>
-            </article>
-          </div>
+    <section class="section" id="overview" aria-label="Research overview">
+      <div class="container overview-grid"><div class="overview-copy"><p>MOSAIC treats full-reference point cloud quality assessment as a multimodal perceptual inference problem, motivated by David Marr’s three-level account of vision.</p><p>It compares local 3D structure, RGB appearance, and projected 2D saliency between reference and distorted point clouds. Geometry and color first form an intrinsic 3D fidelity score; saliency-map consistency then adds complementary attention-related evidence.</p><p class="inline-note">The metric uses deterministic cues and bounded adaptive weights, without MOS-supervised training or regression-based score integration.</p></div></div>
+    </section>
+
+    <section class="section section-tint" id="method" aria-labelledby="method-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">Method</p><h2 id="method-title">Three cues.<br>Two stages of fusion.</h2></div><p>Compare intrinsic 3D fidelity first.<br>Then bring in projected visual attention.</p></div>
+        <figure class="framework">
+          <a href="assets/mosaic_framework.png" class="framework-link" target="_blank" rel="noopener" aria-label="Open the full-size MOSAIC framework"><img src="assets/mosaic_framework.png" width="1443" height="801" loading="lazy" decoding="async" alt="MOSAIC framework: align reference and distorted point clouds; extract geometry, color and six-view saliency cues; compare each modality; fuse geometry and color, then combine with saliency to produce a quality score."></a>
+          <figcaption><span>From aligned point clouds to a perceptual fidelity score.</span><a href="assets/mosaic_framework.png" target="_blank" rel="noopener">View full size</a></figcaption>
+        </figure>
+        <div class="method-grid">
+          <article class="method-item geometry-item"><span class="component-label">3D geometry</span><h3>Read the structure</h3><p>Curvature, linearity, and local point density capture changes in shape and sampling.</p></article>
+          <article class="method-item color-item"><span class="component-label">3D color</span><h3>Compare appearance</h3><p>Local RGB residuals describe chromatic contrast in matched point neighborhoods.</p></article>
+          <article class="method-item saliency-item"><span class="component-label">2D saliency</span><h3>Compare attention cues</h3><p>Saliency-map SSIM is averaged across six orthogonal views as a complementary fidelity cue.</p></article>
+          <article class="method-item fusion-item"><span class="component-label">Adaptive fusion</span><h3>Combine in two stages</h3><p>Bounded sigmoid-based weights fuse geometry and color, then integrate saliency consistency.</p></article>
         </div>
-      </section>
+        <p class="section-note">Saliency-map consistency is a separate cue, rather than a spatial weight for pooling local 3D distortions. <a href="assets/mosaic.pdf#page=4" target="_blank" rel="noopener">Read the method in the paper</a>.</p>
+      </div>
+    </section>
 
-      <section class="section" id="results" aria-labelledby="results-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <div>
-              <p class="section-kicker">Results</p>
-              <h2 id="results-title">Strong training-free performance across datasets.</h2>
-            </div>
-            <p>Best training-free results on WPC and LS-PCQA.</p>
-          </div>
-          <div class="metrics" aria-label="Highlighted MOSAIC results">
-            <div class="metric">
-              <span class="metric-tag">WPC</span>
-              <span class="metric-value">0.844 / 0.834</span>
-              <span class="metric-label">WPC PLCC / SROCC</span>
-            </div>
-            <div class="metric">
-              <span class="metric-tag">LS-PCQA</span>
-              <span class="metric-value">0.622 / 0.598</span>
-              <span class="metric-label">LS-PCQA PLCC / SROCC</span>
-            </div>
-            <div class="metric">
-              <span class="metric-tag">Runtime</span>
-              <span class="metric-value">6.41s</span>
-              <span class="metric-label">Average runtime</span>
-            </div>
-          </div>
-          <div class="result-block">
-            <div class="result-copy">
-              <h3>MOSAIC across five PCQA datasets</h3>
-            </div>
-            <div class="table-wrap" role="region" aria-label="MOSAIC result table across datasets" tabindex="0">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Dataset</th>
-                    <th>PLCC</th>
-                    <th>SROCC</th>
-                    <th>RMSE</th>
-                    <th>Positioning</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>SJTU</td>
-                    <td>0.912</td>
-                    <td>0.898</td>
-                    <td>0.994</td>
-                    <td>Competitive</td>
-                  </tr>
-                  <tr>
-                    <td>WPC</td>
-                    <td>0.844</td>
-                    <td>0.834</td>
-                    <td>12.292</td>
-                    <td>Best training-free</td>
-                  </tr>
-                  <tr>
-                    <td>ICIP</td>
-                    <td>0.965</td>
-                    <td>0.955</td>
-                    <td>0.297</td>
-                    <td>Competitive</td>
-                  </tr>
-                  <tr>
-                    <td>LS-PCQA</td>
-                    <td>0.622</td>
-                    <td>0.598</td>
-                    <td>0.652</td>
-                    <td>Best training-free</td>
-                  </tr>
-                  <tr>
-                    <td>MJ-PCCD</td>
-                    <td>0.831</td>
-                    <td>0.755</td>
-                    <td>0.651</td>
-                    <td>Competitive</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="result-block">
-            <div class="result-copy">
-              <h3>Selected training-free baseline comparison</h3>
-            </div>
-            <div class="table-wrap" role="region" aria-label="Selected training-free baseline comparison on WPC and LS-PCQA" tabindex="0">
-              <table class="wide-table">
-                <thead>
-                  <tr>
-                    <th>Method</th>
-                    <th>WPC PLCC</th>
-                    <th>WPC SROCC</th>
-                    <th>WPC RMSE</th>
-                    <th>LS-PCQA PLCC</th>
-                    <th>LS-PCQA SROCC</th>
-                    <th>LS-PCQA RMSE</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>PCQM</td>
-                    <td>0.750</td>
-                    <td>0.743</td>
-                    <td>15.164</td>
-                    <td>0.404</td>
-                    <td>0.362</td>
-                    <td>0.761</td>
-                  </tr>
-                  <tr>
-                    <td>GraphSIM</td>
-                    <td>0.687</td>
-                    <td>0.678</td>
-                    <td>16.649</td>
-                    <td>0.252</td>
-                    <td>0.243</td>
-                    <td>0.805</td>
-                  </tr>
-                  <tr>
-                    <td>PQI</td>
-                    <td>0.813</td>
-                    <td>0.808</td>
-                    <td>13.364</td>
-                    <td>0.437</td>
-                    <td>0.379</td>
-                    <td>0.748</td>
-                  </tr>
-                  <tr>
-                    <td>TCDM</td>
-                    <td>0.806</td>
-                    <td>0.804</td>
-                    <td>13.557</td>
-                    <td>0.335</td>
-                    <td>0.325</td>
-                    <td>0.784</td>
-                  </tr>
-                  <tr>
-                    <td>PHM</td>
-                    <td>0.838</td>
-                    <td>0.833</td>
-                    <td>12.510</td>
-                    <td>0.546</td>
-                    <td>0.500</td>
-                    <td>0.697</td>
-                  </tr>
-                  <tr class="highlight-row">
-                    <td>MOSAIC</td>
-                    <td>0.844</td>
-                    <td>0.834</td>
-                    <td>12.292</td>
-                    <td>0.622</td>
-                    <td>0.598</td>
-                    <td>0.652</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="result-columns">
-            <div class="result-block compact">
-              <div class="result-copy">
-                <h3>Fusion strategy ablation</h3>
-              </div>
-              <div class="table-wrap" role="region" aria-label="Fusion strategy ablation" tabindex="0">
-                <table class="compact-table">
-                  <thead>
-                    <tr>
-                      <th>Scheme</th>
-                      <th>Fusion</th>
-                      <th>WPC PLCC/SROCC</th>
-                      <th>LS-PCQA PLCC/SROCC</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Only 3D</td>
-                      <td>Adaptive</td>
-                      <td>0.793 / 0.775</td>
-                      <td>0.523 / 0.493</td>
-                    </tr>
-                    <tr>
-                      <td>One-stage</td>
-                      <td>Uniform</td>
-                      <td>0.835 / 0.823</td>
-                      <td>0.564 / 0.533</td>
-                    </tr>
-                    <tr>
-                      <td>One-stage</td>
-                      <td>Adaptive</td>
-                      <td>0.836 / 0.825</td>
-                      <td>0.586 / 0.560</td>
-                    </tr>
-                    <tr>
-                      <td>Two-stage</td>
-                      <td>Uniform</td>
-                      <td>0.844 / 0.833</td>
-                      <td>0.592 / 0.566</td>
-                    </tr>
-                    <tr class="highlight-row">
-                      <td>Two-stage</td>
-                      <td>Adaptive</td>
-                      <td>0.844 / 0.834</td>
-                      <td>0.622 / 0.598</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="result-block compact">
-              <div class="result-copy">
-                <h3>Runtime comparison</h3>
-              </div>
-              <div class="table-wrap" role="region" aria-label="Runtime comparison across methods" tabindex="0">
-                <table class="compact-table">
-                  <thead>
-                    <tr>
-                      <th>Method</th>
-                      <th>Time (s)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>PCQM</td>
-                      <td>3.55</td>
-                    </tr>
-                    <tr>
-                      <td>PointSSIM</td>
-                      <td>4.24</td>
-                    </tr>
-                    <tr>
-                      <td>PQI</td>
-                      <td>4.71</td>
-                    </tr>
-                    <tr>
-                      <td>TCDM</td>
-                      <td>5.22</td>
-                    </tr>
-                    <tr class="highlight-row">
-                      <td>MOSAIC</td>
-                      <td>6.41</td>
-                    </tr>
-                    <tr>
-                      <td>PHM</td>
-                      <td>14.96</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <p class="note">
-            Higher PLCC/SROCC and lower RMSE are better.
-          </p>
+    <section class="section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">Evaluation</p><h2 id="results-title">Consistent across<br>five public datasets.</h2></div><p>Best average PLCC, SROCC, and RMSE among the evaluated training-free metrics with results on all five datasets.</p></div>
+        <div class="metrics">
+          <article class="metric"><span class="metric-tag">WPC</span><div class="metric-value">0.844 <span>/</span> 0.834</div><p>PLCC / SROCC</p><small>Best among evaluated training-free metrics</small></article>
+          <article class="metric"><span class="metric-tag">LS-PCQA</span><div class="metric-value">0.622 <span>/</span> 0.598</div><p>PLCC / SROCC</p><small>Best among evaluated training-free metrics</small></article>
         </div>
-      </section>
+        <div class="result-heading"><h3>Dataset-wise performance</h3><a class="source-link" href="assets/mosaic.pdf#page=6" target="_blank" rel="noopener">Paper · Table II</a></div>
+        <div class="table-wrap" role="region" aria-label="MOSAIC results across five datasets" tabindex="0"><table class=""><caption class="sr-only">MOSAIC results across five datasets</caption><thead><tr><th scope="col">Dataset</th><th scope="col">PLCC</th><th scope="col">SROCC</th><th scope="col">RMSE</th><th scope="col">Among evaluated training-free metrics</th></tr></thead><tbody><tr><th scope="row">SJTU</th><td>0.912</td><td>0.898</td><td>0.994</td><td>Second-best RMSE</td></tr><tr><th scope="row">WPC</th><td>0.844</td><td>0.834</td><td>12.292</td><td><span class="table-badge">Best on all three metrics</span></td></tr><tr><th scope="row">ICIP</th><td>0.965</td><td>0.955</td><td>0.297</td><td>Competitive</td></tr><tr><th scope="row">LS-PCQA</th><td>0.622</td><td>0.598</td><td>0.652</td><td><span class="table-badge">Best on all three metrics</span></td></tr><tr><th scope="row">MJ-PCCD</th><td>0.831</td><td>0.755</td><td>0.651</td><td>Second-best on all three metrics</td></tr></tbody></table></div>
+        <p class="table-note">Higher PLCC/SROCC and lower RMSE indicate better performance. RMSE uses each dataset’s subjective-score scale and is not directly comparable across datasets.</p>
+        <details class="results-details" open><summary>Selected training-free baseline comparison <span>WPC &amp; LS-PCQA</span></summary><div class="details-content"><p class="table-note">A selection from the paper’s training-free comparison; the complete comparison is in Table II.</p><div class="table-wrap" role="region" aria-label="Selected training-free baselines on WPC and LS-PCQA" tabindex="0"><table class="baseline-table"><caption class="sr-only">Selected training-free baselines on WPC and LS-PCQA</caption><thead><tr><th scope="col">Method</th><th scope="col">WPC<br>PLCC</th><th scope="col">WPC<br>SROCC</th><th scope="col">WPC<br>RMSE</th><th scope="col">LS-PCQA<br>PLCC</th><th scope="col">LS-PCQA<br>SROCC</th><th scope="col">LS-PCQA<br>RMSE</th></tr></thead><tbody><tr><th scope="row">PCQM</th><td>0.750</td><td>0.743</td><td>15.164</td><td>0.404</td><td>0.362</td><td>0.761</td></tr><tr><th scope="row">GraphSIM</th><td>0.687</td><td>0.678</td><td>16.649</td><td>0.252</td><td>0.243</td><td>0.805</td></tr><tr><th scope="row">PQI</th><td>0.813</td><td>0.808</td><td>13.364</td><td>0.437</td><td>0.379</td><td>0.748</td></tr><tr><th scope="row">TCDM</th><td>0.806</td><td>0.804</td><td>13.557</td><td>0.335</td><td>0.325</td><td>0.784</td></tr><tr><th scope="row">PHM</th><td>0.838</td><td>0.833</td><td>12.510</td><td>0.546</td><td>0.500</td><td>0.697</td></tr><tr class="highlight-row"><th scope="row">MOSAIC</th><td>0.844</td><td>0.834</td><td>12.292</td><td>0.622</td><td>0.598</td><td>0.652</td></tr></tbody></table></div></div></details>
+        <div class="evaluation-note"><span>Evaluation protocol</span><p>The quality metric is training-free. For benchmark evaluation, predicted scores are mapped to MOS using the paper’s five-parameter logistic fitting procedure. Results here follow that reported protocol.</p></div>
+      </div>
+    </section>
 
-      <section class="section muted" id="citation" aria-labelledby="citation-title">
-        <div class="section-inner citation-grid">
-          <div>
-            <p class="section-kicker">Citation</p>
-            <h2 id="citation-title">Citation coming soon.</h2>
-          </div>
-          <pre aria-label="Citation placeholder"><code>Citation coming soon.</code></pre>
-        </div>
-      </section>
-    </main>
+    <section class="section section-tint" id="analysis" aria-labelledby="analysis-title">
+      <div class="container"><div class="section-heading"><div><p class="eyebrow">A closer look</p><h2 id="analysis-title">What does each<br>design choice add?</h2></div><p>The ablation separates the contribution of multimodal cues from the contribution of two-stage fusion.</p></div>
+      <div class="analysis-grid"><article><div class="result-heading"><h3>Fusion strategy ablation</h3><a class="source-link" href="assets/mosaic.pdf#page=8" target="_blank" rel="noopener">Table VI</a></div><div class="table-wrap" role="region" aria-label="Multimodal fusion ablation" tabindex="0"><table class="ablation-table"><caption class="sr-only">Multimodal fusion ablation</caption><thead><tr><th scope="col">Fusion scheme</th><th scope="col">WPC<br>PLCC / SROCC</th><th scope="col">LS-PCQA<br>PLCC / SROCC</th></tr></thead><tbody><tr><th scope="row">Only 3D · adaptive</th><td>0.793 / 0.775</td><td>0.523 / 0.493</td></tr><tr><th scope="row">One-stage · uniform</th><td>0.835 / 0.823</td><td>0.564 / 0.533</td></tr><tr><th scope="row">One-stage · adaptive</th><td>0.836 / 0.825</td><td>0.586 / 0.560</td></tr><tr><th scope="row">Two-stage · uniform</th><td>0.844 / 0.833</td><td>0.592 / 0.566</td></tr><tr class="highlight-row"><th scope="row">Two-stage · adaptive</th><td>0.844 / 0.834</td><td>0.622 / 0.598</td></tr></tbody></table></div><p class="table-note">“Only 3D” includes geometry and color. The final two-stage adaptive scheme has the best or tied-best results on both datasets across the three reported criteria.</p></article><aside class="ablation-insight"><span class="eyebrow">Adding saliency + two-stage fusion</span><div class="insight-number">0.493 <span>to</span> 0.598</div><h3>LS-PCQA SROCC</h3><p>From the geometry-and-color baseline to the full MOSAIC model. Projected saliency adds evidence beyond intrinsic 3D fidelity.</p><a href="assets/mosaic.pdf#page=8" target="_blank" rel="noopener">Explore the ablations in the paper</a></aside></div>
+      </div>
+    </section>
 
-    <footer class="site-footer">
-      <span>MOSAIC</span>
-      <span>Full-Reference Point Cloud Quality Assessment</span>
-    </footer>
-  </body>
+    <section class="section citation-section" id="citation" aria-labelledby="citation-title">
+      <div class="container citation-grid"><div><p class="eyebrow">Citation &amp; resources</p><h2 id="citation-title">Build on<br>this work.</h2><p>Accepted for publication in <em>IEEE Transactions on Circuits and Systems for Video Technology</em>.</p><div class="resource-links"><a href="assets/mosaic.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg>Read the paper</a><a href="https://github.com/LiJacci/MOSAIC.git" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>Code on GitHub</a></div></div><div class="citation-box citation-placeholder"><span class="eyebrow">BibTeX</span><h3>Coming soon.</h3></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>MOSAIC</a><span>Multimodal perceptual cue fusion</span><a href="mailto:lijiaxin@smail.nju.edu.cn">Contact</a></div><p class="container copyright">Copyright © 2026 IEEE. Personal use of this material is permitted. However, permission to use this material for any other purposes must be obtained from the IEEE by sending an email to pubs-permissions@ieee.org.</p></footer>
+</body>
 </html>
